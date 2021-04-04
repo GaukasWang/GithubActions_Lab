@@ -1,6 +1,6 @@
 #!/bin/bash
 
-test_ret=$(grep -E -R -n -v "^ ?(#|//).*?$" * | grep "if" | grep "=" | grep -v "==" | grep -v "!=")
+test_ret=$(grep -E -R -n "^ ?if(\ |\().*?$" * | sed 's/\/\/.*/\/\//' | sed 's/#.*/#/' | grep "=" | grep -v "==" | grep -v "!=" | grep -v "<=" | grep -v ">=")
 
 if [ "$?" -eq "0" ]; then
 	printf "Unsafe If statements:\n"
